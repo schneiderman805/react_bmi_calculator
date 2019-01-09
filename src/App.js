@@ -9,47 +9,39 @@ class App extends Component {
     this.state = {
       weight: '',
       height: '',
-      methodType: 'metric'
-    }
-  }
-
-  calculateMethod () {
-    if (this.state.methodType === 'metric') {
-      this.setState({ methodType: 'imperial' });
-    } else {
-      this.setState({ methodType: 'metric'})
+      method: 'metric'
     }
   }
 
   render() {
     return (
-      
-      <div id="App">
+      <div className="App">
 
         <div>
-        <h1>BMI Converter</h1>
+          <h2>BMI Converter</h2>
         </div>
 
         <div>
-          <label>
-            Weight {this.state.methodType === 'metric' ? '(kg)' : '(lbs)'}
-          </label>
+          <select name="method" id="method" value={this.state.method} onChange={(e) => this.setState({ method: e.target.value })}>
+            <option value="metric">Metric</option>
+            <option value="imperial">Imperial</option>
+          </select>
+        </div>
+
+        <div>
+          <label>{ this.state.method === 'metric' ? 'Weight(kg)' : 'Weight(lbs)' }</label> 
           <input name="weight" value={this.state.weight} onChange={(e) => this.setState({ weight: e.target.value })} />
         </div>
 
         <div>
-          <label>
-            Height {this.state.methodType === 'metric' ? '(cm)' : '(inch)'}
-          </label>
+          <label>{ this.state.method === 'metric' ? 'Height(cm)' : 'Height(in)' }</label>
           <input name="height" value={this.state.height} onChange={(e) => this.setState({ height: e.target.value })} />
         </div>
-        <button 
-          name="methodSelector" onClick={() => this.calculateMethod()}>{this.state.methodType === 'metric' ? 'imperial' : 'metric'}
-        </button>
+
         <DisplayResult
           weight={this.state.weight}
           height={this.state.height}
-          methodType={this.state.methodType}
+          method={this.state.method}
         />
       </div>
     );

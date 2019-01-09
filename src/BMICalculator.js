@@ -8,10 +8,10 @@ export const bmiCalculation = (weight, height, method) => {
   
     bmi = weight / (height / 100 * height / 100);
 
-    if( method === 'Metric') {
+    if( method === 'metric') {
         bmi = weight / (height / 100 * height / 100);
     } else {
-        bmi = weight * 703 / (height * height)
+        bmi = weight / (height * height) * 703;
     };
   
     let finalBMI = parseFloat(bmi.toFixed(2));
